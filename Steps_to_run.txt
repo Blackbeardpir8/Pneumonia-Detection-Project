@@ -1,0 +1,74 @@
+1. Clone Repository & Create Virtual Environment
+git clone <repo_url>
+cd pneumonia-detection-project
+python -m venv venv
+
+
+Activate venv:Windows
+venv\Scripts\activate
+
+
+2. Install Dependencies
+pip install -r requirements.txt
+
+3. Verify Dataset Exists
+Make sure dataset is placed at:
+
+ml/data/raw/kaggle/train/NORMAL
+ml/data/raw/kaggle/train/PNEUMONIA
+ml/data/raw/kaggle/test
+ml/data/raw/kaggle/val
+
+4. Test Image Loading & Preprocessing
+
+These scripts confirm images can be read and transformed.
+
+🔹 CLAHE Visualization
+cd ml
+python visualize_clahe.py
+
+🔹 Pseudocolor Visualization
+python visualize_pseudocolor.py
+
+
+If images appear → preprocessing is working 
+
+5. Test Dataset Class
+Checks if dataset loader correctly finds images & labels.
+python -m training.test_dataset
+
+Expected output:
+
+Total samples: XXXX
+Image shape: torch.Size([1, 224, 224])
+Label: tensor(0 or 1)
+
+6. Test DataLoader
+Ensures batching & shuffling works.
+python -m training.test_dataloader
+
+Expected:
+
+Batch images shape: torch.Size([B, 1, 224, 224])
+Batch labels shape: torch.Size([B])
+
+7. Train Baseline CNN Model
+python -m training.train_baseline
+
+This will:
+
+✔ Load dataset
+✔ Train CNN
+✔ Save model to:
+
+ml/checkpoints/baseline_grayscale.pth
+
+8. Test Trained Model
+python models/test_model.py
+or
+python inference_test.py
+
+Expected:
+
+Tensor shape: [1,1,224,224]
+Prediction: Pneumonia / Normal
