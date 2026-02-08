@@ -8,7 +8,7 @@ from preprocessing.preprocess import load_image
 from preprocessing.pseudocolor import apply_pseudocolor
 
 # CHANGE THIS PATH TO A VALID IMAGE (same one you used for CLAHE)
-image_path = "data/raw/kaggle/train/PNEUMONIA/person9_bacteria_38.jpeg"
+image_path = "data/raw/kaggle/train/PNEUMONIA/person1_virus_6.jpeg"
 
 print("File exists:", os.path.exists(image_path))
 

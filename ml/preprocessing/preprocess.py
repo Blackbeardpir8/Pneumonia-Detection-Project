@@ -3,6 +3,8 @@
 import cv2
 import numpy as np
 import torch
+from preprocessing.clahe import apply_clahe
+from preprocessing.pseudocolor import apply_pseudocolor
 
 IMG_SIZE = 224
 
@@ -51,3 +53,45 @@ def preprocess(image_path):
     image = normalize_image(image)
     tensor = to_tensor(image)
     return tensor
+def preprocess_clahe(image_path):
+    """
+    Preprocessing pipeline with CLAHE
+    """
+    image = load_image(image_path)       # grayscale
+    image = resize_image(image)
+    image = apply_clahe(image)            # 🔥 CLAHE
+    image = normalize_image(image)
+    tensor = to_tensor(image)
+    return tensor
+
+
+def preprocess_pseudocolor(image_path):
+    """
+    Preprocessing pipeline with pseudo-color mapping
+    """
+    image = load_image(image_path)        # grayscale
+    image = resize_image(image)
+    image = apply_pseudocolor(image)      # pseudo-color (3-channel)
+    image = normalize_image(image)        # normalize to [0,1]
+    tensor = to_tensor_rgb(image)          # will produce (1, 3, 224, 224)
+    return tensor
+
+def to_tensor_rgb(image):
+    """
+    Convert HWC RGB image to CHW tensor
+    Input: (224, 224, 3)
+    Output: (1, 3, 224, 224)
+    """
+    image = image.astype("float32")
+
+    # HWC -> CHW
+    image = image.transpose(2, 0, 1)
+
+    tensor = torch.from_numpy(image)
+    tensor = tensor.unsqueeze(0)
+    return tensor
+
+
+# to use this file:
+# from preprocessing.preprocess import preprocess_clahe
+# tensor = preprocess_clahe("path/to/image.jpg")

@@ -7,7 +7,7 @@ from preprocessing.clahe import apply_clahe
 from preprocessing.preprocess import load_image
 
 # CHANGE PATH IF NEEDED
-image_path = "data/raw/kaggle/train/PNEUMONIA/person9_bacteria_38.jpeg"
+image_path = "data/raw/kaggle/train/PNEUMONIA/person1_virus_6.jpeg"
 
 # Load original grayscale image
 original = load_image(image_path)
