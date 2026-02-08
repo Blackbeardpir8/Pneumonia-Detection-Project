@@ -1,2 +1,6 @@
 # Renoving raw Data from git to make it lighter
 ml/data/raw/
+ml/checkpoints/
+ml/data/val/
+ml/data/test/
+ml/data/train/
