@@ -1,12 +1,13 @@
 # Datasets
-ml/data/
-ml/data/**
+ml/data/*
+!ml/data/.gitkeep
 *.jpg
 *.jpeg
 *.png
 
 # Model checkpoints
-ml/checkpoints/
+ml/checkpoints/*
+!ml/checkpoints/.gitkeep
 *.pth
 *.pt
 *.h5
