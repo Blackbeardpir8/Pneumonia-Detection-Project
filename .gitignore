@@ -4,3 +4,9 @@ ml/data/**
 *.jpg
 *.jpeg
 *.png
+
+# Model checkpoints
+ml/checkpoints/
+*.pth
+*.pt
+*.h5
